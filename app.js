@@ -3,8 +3,14 @@ const schema = require('./schema/schema');
 const {
   graphqlHTTP,
 } = require('express-graphql');
+const mongoose = require('mongoose');
 
 const app = express();
+
+mongoose.connect('mongodb+srv://mathieupoterie:ZDqaovvTbcx85Ubz@gql-ninja.hfyst.mongodb.net/GQL-NINJA?retryWrites=true&w=majority');
+mongoose.connection.once('open', () => {
+  console.log('connected to database');
+});
 
 app.use('/graphql', graphqlHTTP({
   schema,
